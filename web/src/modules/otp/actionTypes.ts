@@ -1,0 +1,29 @@
+/**
+ * REGISTER_OTP
+ */
+export const REGISTER_OTP = "REGISTER_OTP";
+
+/**
+ * SIGN_IN_ERROR_OTP
+ */
+export const SIGN_IN_ERROR_OTP = "SIGN_IN_ERROR_OTP";
+
+/**
+ * SIGN_IN_SUCCESS_OTP
+ */
+export const SIGN_IN_SUCCESS_OTP = "SIGN_IN_SUCCESS_OTP";
+
+/**
+ * STATE_CHANGE_OTP
+ */
+export const STATE_CHANGE_OTP = "STATE_CHANGE_OTP";
+
+/**
+ * PASSCODE_CHANGED
+ */
+export const PASSCODE_CHANGED = "PASSCODE_CHANGED";
+
+/**
+ * RESPONSE_RECEIVED
+ */
+export const RESPONSE_RECEIVED = "RESPONSE_RECEIVED";

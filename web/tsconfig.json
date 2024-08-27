@@ -42,7 +42,8 @@
     ".*.js",
     "vite.config.ts",
     "src",
-    "types"
+    "types",
+    "index.tsx"
   ],
   "exclude": [
     "node_modules",

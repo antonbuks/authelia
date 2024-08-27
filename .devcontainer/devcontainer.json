@@ -1,0 +1,20 @@
+{
+	"name": "Authelia Dev Environment",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "app",
+	"workspaceFolder": "/workspace",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "golang.go",
+                "dbaeumer.vscode-eslint",
+                "esbenp.prettier-vscode"
+            ],
+            "settings": {
+                "terminal.integrated.shell.linux": "/bin/bash",
+                "go.toolsManagement.autoUpdate": true
+            },
+        }
+    }
+	// "postCreateCommand": "make build"
+}

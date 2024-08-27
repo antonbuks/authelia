@@ -3,7 +3,7 @@ import { ConfigurationPath } from "@services/Api";
 import { Get } from "@services/Client";
 import { Method2FA, toSecondFactorMethod } from "@services/UserInfo";
 
-interface ConfigurationPayload {
+export interface ConfigurationPayload {
     available_methods: Method2FA[];
 }
 

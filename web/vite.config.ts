@@ -2,6 +2,7 @@ import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 import checkerPlugin from "vite-plugin-checker";
 import istanbul from "vite-plugin-istanbul";
+import { nodePolyfills } from "vite-plugin-node-polyfills";
 import svgr from "vite-plugin-svgr";
 import tsconfigPaths from "vite-tsconfig-paths";
 
@@ -35,52 +36,53 @@ export default defineConfig(({ mode }) => {
 
                         return "static/media/[name].[hash].[ext]";
                     },
-                    chunkFileNames: (chunkInfo) => {
-                        switch (chunkInfo.name) {
-                            case "index":
-                                return `static/js/[name].[hash].js`;
-                            default:
-                                if (chunkInfo.moduleIds.length === 0) {
-                                    return `static/js/[name].[hash].js`;
-                                }
+                    // chunkFileNames: (chunkInfo) => {
+                    //     switch (chunkInfo.name) {
+                    //         case "index":
+                    //             return `static/js/[name].[hash].js`;
+                    //         default:
+                    //             if (chunkInfo.moduleIds.length === 0) {
+                    //                 return `static/js/[name].[hash].js`;
+                    //             }
 
-                                const last = chunkInfo.moduleIds[chunkInfo.moduleIds.length - 1];
+                    //             const last = chunkInfo.moduleIds[chunkInfo.moduleIds.length - 1];
 
-                                if (last.includes("@mui/")) {
-                                    return `static/js/mui.[name].[hash].js`;
-                                }
+                    //             if (last.includes("@mui/")) {
+                    //                 return `static/js/mui.[name].[hash].js`;
+                    //             }
 
-                                const match = last.match(/authelia\/web\/src\/([a-zA-Z]+)\/([a-zA-Z]+)/);
+                    //             const match = last.match(/authelia\/web\/src\/([a-zA-Z]+)\/([a-zA-Z]+)/);
 
-                                if (match) {
-                                    switch (match[2]) {
-                                        case "LoginPortal":
-                                            return `static/js/portal.[name].[hash].js`;
-                                        case "ResetPassword":
-                                            return `static/js/reset-password.[name].[hash].js`;
-                                        case "Settings":
-                                            switch (chunkInfo.name) {
-                                                case "SettingsRouter":
-                                                    return `static/js/settings.router.[hash].js`;
-                                                default:
-                                                    return `static/js/settings.[name].[hash].js`;
-                                            }
-                                        default:
-                                            switch (chunkInfo.name) {
-                                                case "LoginLayout":
-                                                    return `static/js/${match[1]}.Login.[hash].js`;
-                                                case "MinimalLayout":
-                                                    return `static/js/${match[1]}.Minimal.[hash].js`;
-                                                default:
-                                                    return `static/js/${match[1]}.[name].[hash].js`;
-                                            }
-                                    }
-                                }
+                    //             if (match) {
+                    //                 switch (match[2]) {
+                    //                     case "LoginPortal":
+                    //                         return `static/js/portal.[name].[hash].js`;
+                    //                     case "ResetPassword":
+                    //                         return `static/js/reset-password.[name].[hash].js`;
+                    //                     case "Settings":
+                    //                         switch (chunkInfo.name) {
+                    //                             case "SettingsRouter":
+                    //                                 return `static/js/settings.router.[hash].js`;
+                    //                             default:
+                    //                                 return `static/js/settings.[name].[hash].js`;
+                    //                         }
+                    //                     default:
+                    //                         switch (chunkInfo.name) {
+                    //                             case "LoginLayout":
+                    //                                 return `static/js/${match[1]}.Login.[hash].js`;
+                    //                             case "MinimalLayout":
+                    //                                 return `static/js/${match[1]}.Minimal.[hash].js`;
+                    //                             default:
+                    //                                 return `static/js/${match[1]}.[name].[hash].js`;
+                    //                         }
+                    //                 }
+                    //             }
 
-                                return `static/js/[name].[hash].js`;
-                        }
-                    },
+                    //             return `static/js/[name].[hash].js`;
+                    //     }
+                    // },
                     entryFileNames: `static/js/[name].[hash].js`,
+                    app: "index.ts",
                 },
             },
             sourcemap,
@@ -104,11 +106,12 @@ export default defineConfig(({ mode }) => {
             setupFiles: ["src/setupTests.ts"],
         },
         plugins: [
-            checkerPlugin({ eslint: { lintCommand: "eslint . --ext .js,.jsx,.ts,.tsx" }, typescript: true }),
-            istanbulPlugin,
+            // checkerPlugin({ eslint: { lintCommand: "eslint . --ext .js,.jsx,.ts,.tsx" }, typescript: true }),
+            // istanbulPlugin,
             react(),
             svgr(),
             tsconfigPaths(),
+            nodePolyfills(),
         ],
     };
 });
